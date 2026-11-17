@@ -5,30 +5,30 @@ import { ui, home, type Lang } from '../i18n/ui';
 interface Props { lang?: Lang; alternates?: Record<Lang, string>; panel?: boolean }
 const { lang = 'es', alternates = { es: '/', en: '/en' }, panel = false } = Astro.props;
 const tx = ui[lang];
-const links = [['hoy', tx.nav.hoy], ['reserva', tx.nav.reserva], ['granos', tx.nav.granos], ['carta', tx.nav.productos], ['visita', tx.nav.contacto]] as const;
+const izq = [['hoy', tx.nav.hoy], ['granos', tx.nav.granos], ['carta', tx.nav.productos]] as const;
 ---
-<header class="sticky top-0 z-40 border-b border-linia bg-sal/95 backdrop-blur">
-  <div class="mx-auto flex h-[4.6rem] max-w-[90rem] items-center justify-between gap-6 px-5 sm:px-10">
-    <a href={home(lang)} class="flex items-center gap-3" aria-label={empresa.name}>
-      <img src={emblema.src} width="34" height="34" alt="" class="size-[2.1rem]" />
-      <span class="titol text-[1.65rem] leading-none">Larotî</span>
-    </a>
-    {panel ? <p class="label hidden text-gris sm:block">Panel del obrador</p> : (
-      <nav aria-label={tx.nav.principal} class="hidden xl:block">
-        <ul class="flex gap-9">
-          {links.map(([id, t]) => <li><a href={`${home(lang)}#${id}`} class="text-[0.95rem] font-medium text-mar/70 transition-colors hover:text-mar">{t}</a></li>)}
+<header class="sticky top-0 z-40 border-b border-linia/80 bg-sal/92 backdrop-blur-md">
+  <div class="mx-auto grid h-[4.75rem] max-w-[88rem] grid-cols-[1fr_auto_1fr] items-center gap-6 px-5 sm:px-10">
+    {panel ? <p class="label text-gris">Panel del obrador</p> : (
+      <nav aria-label={tx.nav.principal}>
+        <ul class="hidden gap-9 lg:flex">
+          {izq.map(([id, t]) => <li><a href={`${home(lang)}#${id}`} class="label text-mar/70 transition-colors hover:text-taronja-2">{t}</a></li>)}
         </ul>
       </nav>
     )}
-    <div class="flex items-center gap-5">
+    <a href={home(lang)} class="flex items-center gap-3 justify-self-center">
+      <img src={emblema.src} width="30" height="30" alt="" class="size-[1.9rem]" />
+      <span class="titol text-[1.85rem] leading-none tracking-[0.01em]"><span aria-hidden="true">Larot<span class="i-circ">ı</span></span><span class="sr-only">Larotî</span></span>
+    </a>
+    <div class="flex items-center justify-end gap-6">
       {panel ? <a href="/" class="btn btn-line min-h-10 px-5">Ver la web</a> : (
         <>
-          <ul class="flex gap-3 text-[0.85rem] font-semibold" aria-label={tx.nav.idioma}>
+          <ul class="hidden gap-3 sm:flex" aria-label={tx.nav.idioma}>
             {(['es', 'en'] as const).map((l) => (
-              <li><a href={alternates[l]} hreflang={l} lang={l} aria-current={l === lang ? 'true' : undefined} class={`uppercase ${l === lang ? 'border-b border-mar text-mar' : 'text-mar/65 hover:text-mar'}`}>{l}</a></li>
+              <li><a href={alternates[l]} hreflang={l} lang={l} aria-current={l === lang ? 'true' : undefined} class={`label ${l === lang ? 'text-mar' : 'text-mar/55 hover:text-mar'}`}>{l}</a></li>
             ))}
           </ul>
-          <a href={`${home(lang)}#reserva`} class="btn btn-mar hidden min-h-10 px-5 sm:inline-flex">{tx.nav.btn} <span data-cuenta hidden class="grid min-w-5 place-items-center rounded-full bg-taronja px-1.5 py-0.5 text-[0.68rem] font-bold tracking-normal text-mar">0</span></a>
+          <a href={`${home(lang)}#reserva`} class="btn btn-mar hidden min-h-10 px-5 sm:inline-flex">{tx.nav.btn}<span data-cuenta hidden class="num -my-1 text-[1rem] tracking-normal text-taronja">0</span></a>
         </>
       )}
     </div>

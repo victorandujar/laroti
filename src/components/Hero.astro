@@ -1,81 +1,66 @@
 ---
 /**
- * Portada editorial: titular en dos líneas, un único botón principal y un tríptico de fotos nítidas
- * de su pan a todo el ancho. Debajo, la información útil: si está abierto, dónde y qué hay hoy.
+ * Portada centrada, como la entrada de una finca: titular en serif fina, una sola acción principal
+ * y tres fotos en arco (la central más alta), con dos espigas dibujadas a línea.
  */
 import { Image } from 'astro:assets';
 import clasico from '../assets/productos/clasico.jpg';
 import kamut from '../assets/productos/kamut.jpg';
 import cruasan from '../assets/productos/cruasan.jpg';
+import Espiga from './Espiga.astro';
 import { empresa } from '../data/empresa';
 import { ui, home, type Lang } from '../i18n/ui';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const tx = ui[lang];
-const fotos = [
-  { src: clasico, cap: tx.hero.caps[0] },
-  { src: kamut, cap: tx.hero.caps[1] },
-  { src: cruasan, cap: tx.hero.caps[2] },
-];
 ---
-<section aria-labelledby="hero-t">
-  <div class="mx-auto max-w-[90rem] px-5 pt-12 sm:px-10 sm:pt-20">
-    <p class="label hoja text-taronja-2">{tx.hero.eyebrow}</p>
-    <h1 id="hero-t" class="titol mt-6 text-[clamp(2.7rem,6.9vw,7.2rem)]">
-      <span class="lg:whitespace-nowrap">{tx.hero.l1}</span><br /><span class="text-taronja-2 lg:whitespace-nowrap">{tx.hero.l2}</span>
-    </h1>
-    <div class="mt-9 grid gap-7 lg:grid-cols-12 lg:items-center">
-      <p class="max-w-md text-[1.05rem] leading-relaxed text-gris lg:col-span-5">{tx.hero.text}</p>
-      <div class="flex flex-wrap items-center gap-x-7 gap-y-4 lg:col-span-6 lg:col-start-7 lg:justify-end">
-        <a href={`${home(lang)}#hoy`} class="enllac">{tx.hero.hoy} <span aria-hidden="true">→</span></a>
-        <a href={`${home(lang)}#reserva`} class="btn btn-mar">{tx.hero.cta}</a>
-      </div>
+<section aria-labelledby="hero-t" class="relative overflow-x-clip">
+  <div class="mx-auto max-w-[88rem] px-5 pt-16 text-center sm:px-10 sm:pt-24">
+    <Espiga class="mx-auto mb-7 h-14 text-taronja-2" granos={5} />
+    <p class="label text-taronja-2">{tx.hero.eyebrow}</p>
+    <h1 id="hero-t" class="titol mx-auto mt-8 max-w-[15ch] text-[clamp(3.3rem,8.2vw,8.4rem)] font-light leading-[0.94]" set:html={tx.hero.h1} />
+    <p class="mx-auto mt-8 max-w-[34rem] text-[1.08rem] text-gris">{tx.hero.text}</p>
+    <div class="mt-10 flex flex-wrap items-center justify-center gap-x-9 gap-y-5">
+      <a href={`${home(lang)}#reserva`} class="btn btn-mar">{tx.hero.cta}</a>
+      <a href={`${home(lang)}#hoy`} class="enllac">{tx.hero.hoy}</a>
     </div>
+    <p data-estado class="mt-10 inline-flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-[0.92rem] text-gris">
+      <span data-punto class="relative inline-block size-1.5 rounded-full bg-linia"></span>
+      <span data-e1 class="text-mar">{tx.estado.horario}</span><span aria-hidden="true">·</span><span data-e2></span>
+      <span aria-hidden="true">·</span><span>{empresa.street}, {empresa.city}</span>
+    </p>
   </div>
 
-  <ul class="tripti mx-auto mt-12 grid max-w-[90rem] gap-3 px-5 sm:mt-16 sm:grid-cols-3 sm:px-10">
-    {fotos.map((f, i) => (
-      <li class={i > 0 ? 'hidden sm:block' : ''}>
+  <div class="relative mx-auto mt-20 max-w-[76rem] px-5 pb-24 sm:mt-24 sm:px-10 sm:pb-32">
+    <ul class="grid grid-cols-12 items-end gap-4 sm:gap-8">
+      <li class="col-span-4 hidden sm:block">
         <figure>
-          <div class="overflow-hidden bg-sal-2">
-            <Image src={f.src} alt={f.cap} widths={[480, 720, 1100]} sizes="(min-width: 640px) 31vw, 92vw" loading="eager" fetchpriority={i === 0 ? 'high' : 'auto'} class="foto aspect-[4/5] w-full object-cover" style={`--d:${i * 140}ms`} />
-          </div>
-          <figcaption class="mt-3 flex items-baseline justify-between gap-4 text-sm text-gris"><span class="text-mar">{f.cap}</span><span>0{i + 1}</span></figcaption>
+          <div class="arc" data-reveal="foto" style="--i:1"><div class="arc-in"><Image src={kamut} alt={tx.hero.caps[1]} widths={[360, 560]} sizes="24vw" loading="eager" class="aspect-[3/4] w-full object-cover" /></div></div>
+          <figcaption class="cursiva mt-6 text-center text-[1.1rem] text-gris">{tx.hero.caps[1]}</figcaption>
         </figure>
       </li>
-    ))}
-  </ul>
-
-  <!-- Lo útil, de un vistazo -->
-  <div class="mx-auto max-w-[90rem] px-5 pb-20 pt-8 sm:px-10 sm:pb-28">
-    <dl class="grid border-y border-mar sm:grid-cols-3">
-      <div data-estado class="flex items-center gap-3 border-b border-linia py-5 sm:border-b-0 sm:border-r sm:pr-6">
-        <span data-punto class="relative inline-block size-2.5 shrink-0 rounded-full bg-linia"></span>
-        <dt class="sr-only">{tx.contacto.horario}</dt>
-        <dd><span data-e1 class="font-semibold">{tx.estado.horario}</span> <span class="text-gris">· <span data-e2></span></span></dd>
-      </div>
-      <div class="flex items-center gap-3 border-b border-linia py-5 sm:border-b-0 sm:border-r sm:px-6">
-        <dt class="sr-only">{tx.contacto.donde}</dt>
-        <dd><a href={empresa.maps} target="_blank" rel="noopener" class="font-semibold underline-offset-4 hover:underline">{empresa.street}</a> <span class="text-gris">· {empresa.city}, {empresa.region}</span></dd>
-      </div>
-      <div class="flex items-center justify-between gap-3 py-5 sm:pl-6">
-        <dt class="sr-only">{tx.hoy.label}</dt>
-        <dd><span data-hoy-recompte class="font-semibold">—</span> <span class="text-gris">{tx.hero.enMostrador}</span></dd>
-        <a href={`${home(lang)}#hoy`} class="text-xl" aria-label={tx.hero.hoy}>→</a>
-      </div>
-    </dl>
+      <li class="col-span-12 sm:col-span-4">
+        <figure>
+          <div class="arc" data-reveal="foto"><div class="arc-in"><Image src={clasico} alt={tx.hero.caps[0]} widths={[400, 640, 900]} sizes="(min-width: 640px) 28vw, 90vw" loading="eager" fetchpriority="high" class="aspect-[3/4.3] w-full object-cover" /></div></div>
+          <figcaption class="cursiva mt-6 text-center text-[1.1rem] text-gris">{tx.hero.caps[0]}</figcaption>
+        </figure>
+      </li>
+      <li class="col-span-4 hidden sm:block">
+        <figure>
+          <div class="arc" data-reveal="foto" style="--i:2"><div class="arc-in"><Image src={cruasan} alt={tx.hero.caps[2]} widths={[360, 560]} sizes="24vw" loading="eager" class="aspect-[3/4] w-full object-cover" /></div></div>
+          <figcaption class="cursiva mt-6 text-center text-[1.1rem] text-gris">{tx.hero.caps[2]}</figcaption>
+        </figure>
+      </li>
+    </ul>
   </div>
 </section>
 <style>
-  @media (prefers-reduced-motion: no-preference) {
-    .foto { animation: entra 1400ms cubic-bezier(0.2, 0.7, 0.2, 1) both; animation-delay: var(--d); }
-    @keyframes entra { from { opacity: 0; transform: scale(1.06); } }
-  }
   [data-estado][data-abierta="true"] [data-punto] { background: var(--color-verd); }
   [data-estado][data-abierta="true"] [data-punto]::after { content: ''; position: absolute; inset: -4px; border-radius: 999px; border: 1px solid var(--color-verd); opacity: 0; }
-  [data-estado][data-abierta="false"] [data-punto] { background: var(--color-taronja); }
+  [data-estado][data-abierta="false"] [data-punto] { background: var(--color-taronja-2); }
   @media (prefers-reduced-motion: no-preference) {
-    [data-estado][data-abierta="true"] [data-punto]::after { animation: late 2.4s ease-out infinite; }
-    @keyframes late { 0% { opacity: 0.9; transform: scale(0.5); } 100% { opacity: 0; transform: scale(1.8); } }
+    [data-estado][data-abierta="true"] [data-punto]::after { animation: late 2.6s ease-out infinite; }
+    @keyframes late { 0% { opacity: 0.9; transform: scale(0.4); } 100% { opacity: 0; transform: scale(2); } }
   }
 </style>
+<style is:global>#hero-t em { color: var(--color-taronja-2); }</style>

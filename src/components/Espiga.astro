@@ -1,0 +1,42 @@
+---
+/**
+ * Espiga de trigo dibujada a línea fina (estilo grabado). La geometría se calcula aquí:
+ * granos en forma de almendra, alternos a ambos lados del tallo, con sus aristas.
+ */
+interface Props { class?: string; granos?: number; aristas?: boolean }
+const { class: cls = '', granos = 8, aristas = true } = Astro.props;
+
+const almendra = (cx: number, cy: number, ang: number, l = 15, w = 5.6) => {
+  const r = (ang * Math.PI) / 180, c = Math.cos(r), s = Math.sin(r);
+  const p = (x: number, y: number) => `${(cx + x * c - y * s).toFixed(2)} ${(cy + x * s + y * c).toFixed(2)}`;
+  return `M${p(0, -l / 2)} C${p(w, -l / 4)} ${p(w, l / 4)} ${p(0, l / 2)} C${p(-w, l / 4)} ${p(-w, -l / 4)} ${p(0, -l / 2)} Z M${p(0, -l / 2 + 2.5)} L${p(0, l / 2 - 3)}`;
+};
+const arista = (cx: number, cy: number, ang: number, l = 15, largo = 26) => {
+  const r = (ang * Math.PI) / 180;
+  const x0 = cx + Math.sin(r) * (l / 2), y0 = cy - Math.cos(r) * (l / 2);
+  return `M${x0.toFixed(2)} ${y0.toFixed(2)} L${(x0 + Math.sin(r) * largo).toFixed(2)} ${(y0 - Math.cos(r) * largo).toFixed(2)}`;
+};
+const parts: string[] = [];
+const top = 30, paso = 11.5;
+for (let i = 0; i < granos; i++) {
+  const y = top + 16 + i * paso;
+  const esc = 1 - i * 0.025;
+  for (const lado of [-1, 1]) {
+    const ang = lado * 24;
+    const cx = 40 + lado * 5.2, cy = y + (lado > 0 ? paso / 2 : 0);
+    parts.push(almendra(cx, cy, ang, 15 * esc, 5.4 * esc));
+    if (aristas) parts.push(arista(cx, cy, ang, 15 * esc, 22 + (granos - i) * 1.6));
+  }
+}
+parts.push(almendra(40, top + 4, 0, 14, 5));
+if (aristas) parts.push(`M40 ${top - 3} L40 ${top - 30}`);
+const base = top + 16 + granos * paso;
+const tallo = `M40 ${top + 6} C40.5 ${base - 10} 41 ${base + 30} 39 ${base + 70}`;
+const fulla = `M39.6 ${base + 40} C52 ${base + 22} 60 ${base + 8} 62 ${base - 8} C54 ${base + 6} 45 ${base + 18} 39.8 ${base + 34}`;
+const h = base + 74;
+---
+<svg viewBox={`0 0 80 ${h.toFixed(0)}`} class={cls} fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+  <path d={tallo} />
+  <path d={fulla} />
+  {parts.map((d) => <path d={d} />)}
+</svg>

@@ -1,66 +1,85 @@
 @import "tailwindcss";
 
 /*
-  Dirección premium y editorial: papel cálido, tinta azul noche (la de su emblema),
-  serif fina, líneas de 1 px y el naranja de la marca solo como acento.
+  Larotî · dirección «mallorquina artesanal».
+  Papel de marés, tinta marrón, terracota de baldosa y verde algarrobo.
+  Serif fina (Cormorant Garamond) para la voz; Jost para el texto y las etiquetas.
+  Arcos de finca para las fotos, filetes finos y espigas a línea.
 */
 @theme {
-  --color-sal: #f6f2eb;
-  --color-sal-2: #ede7dc;
-  --color-linia: #dcd4c6;
-  --color-mar: #161b27;
-  --color-mar-2: #222938;
-  --color-verd: #3f7a52;
-  --color-taronja: #d98a37;
-  --color-taronja-2: #a35a1d;
-  --color-pruna: #e3a487;
-  --color-gris: #6a665e;
-  --color-salvia: #e3ebe1;
-  --color-salvia-2: #c9d9c6;
-  --color-preseg: #f5e4d8;
-  --font-sans: "Albert Sans Variable", ui-sans-serif, system-ui, sans-serif;
-  --font-serif: "Syne Variable", ui-sans-serif, system-ui, sans-serif;
+  --color-sal: #f3ece0;      /* papel */
+  --color-sal-2: #ebe1cf;    /* papel tostado */
+  --color-mares: #e3d4b9;    /* piedra de marés */
+  --color-linia: #d5c5a8;    /* filete */
+  --color-mar: #2a211b;      /* tinta */
+  --color-mar-2: #3a2f27;
+  --color-verd: #4d6a3c;     /* hoja de olivo */
+  --color-garrover: #303a2b; /* algarrobo, secciones oscuras */
+  --color-garrover-2: #3d4937;
+  --color-taronja: #c88446;  /* trigo tostado */
+  --color-taronja-2: #9a4c2a;/* terracota */
+  --color-pruna: #d99b7c;
+  --color-gris: #6f6456;
+  --color-salvia: #e4e2d0;
+  --color-salvia-2: #d3d2bb;
+  --color-preseg: #efe2d2;
+  --font-sans: "Jost Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Cormorant Garamond", ui-serif, Georgia, serif;
   --font-mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
 }
 
 html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
-body { background: var(--color-sal); color: var(--color-mar); font-family: var(--font-sans); font-size: 1.0625rem; line-height: 1.6; -webkit-font-smoothing: antialiased; }
-::selection { background: var(--color-mar); color: var(--color-sal); }
-:focus-visible { outline: 1.5px solid var(--color-taronja-2); outline-offset: 4px; }
+body { background: var(--color-sal); color: var(--color-mar); font-family: var(--font-sans); font-size: 1.0625rem; font-weight: 400; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+/* Grano de papel muy sutil sobre toda la página */
+body::after { content: ''; position: fixed; inset: 0; z-index: 70; pointer-events: none; opacity: 0.32; mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.45 0 0 0 0 0.36 0 0 0 0 0.25 0 0 0 0.16 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+::selection { background: var(--color-taronja-2); color: var(--color-sal); }
+:focus-visible { outline: 1px solid var(--color-taronja-2); outline-offset: 4px; }
 .fosc :focus-visible { outline-color: var(--color-taronja); }
 
-.titol { font-family: var(--font-serif); font-weight: 600; letter-spacing: -0.045em; line-height: 0.96; }
-/* Máscara con la forma de una hoja del emblema */
-.fulla { -webkit-mask: var(--hoja) center / 100% 100% no-repeat; mask: var(--hoja) center / 100% 100% no-repeat; }
-.titol em { font-style: normal; }
-/* Etiqueta: una hoja pequeña del emblema delante, en minúscula normal */
-.label { display: inline-flex; align-items: center; gap: 0.55rem; font-size: 0.92rem; font-weight: 600; letter-spacing: -0.005em; }
-.label.hoja::before { content: ''; width: 0.8rem; height: 0.8rem; flex: none; background: currentColor; -webkit-mask: url(/hojas/h4.svg) center / contain no-repeat; mask: url(/hojas/h4.svg) center / contain no-repeat; }
-.num { font-family: var(--font-serif); font-weight: 600; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
+.titol { font-family: var(--font-serif); font-weight: 400; letter-spacing: -0.012em; line-height: 1; }
+.titol em { font-style: italic; font-weight: 400; }
+.label { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.3em; text-transform: uppercase; }
+.num { font-family: var(--font-serif); font-variant-numeric: lining-nums; }
+/* «î» del logotipo: Cormorant coloca mal el circunflejo sobre la i, así que se dibuja aparte */
+.i-circ { position: relative; display: inline-block; }
+.i-circ::after { content: ''; position: absolute; left: 50%; top: 0.2em; width: 0.17em; height: 0.17em; translate: -50% 0; border: solid currentColor; border-width: 0.05em 0 0 0.05em; rotate: 45deg; }
+.cursiva { font-family: var(--font-serif); font-style: italic; }
+
+/* Arco de finca: foto con remate de medio punto y filete fino separado */
+.arc { position: relative; }
+.arc > .arc-in { overflow: hidden; border-radius: 999px 999px 0 0; }
+.arc::after { content: ''; position: absolute; inset: -0.6rem -0.6rem -0.6rem; border: 1px solid var(--color-linia); border-radius: 999px 999px 0 0; pointer-events: none; }
+.fosc .arc::after { border-color: rgb(243 236 224 / 0.22); }
+
+/* Separador con espiga */
+.filet { display: flex; align-items: center; gap: 1.1rem; color: var(--color-taronja-2); }
+.filet::before, .filet::after { content: ''; flex: 1; height: 1px; background: var(--color-linia); }
+.fosc .filet::before, .fosc .filet::after { background: rgb(243 236 224 / 0.2); }
 
 @layer components {
-  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.75rem; min-height: 3.25rem; padding: 0 1.6rem; border: 1px solid var(--color-mar); border-radius: 999px; font-size: 0.98rem; font-weight: 600; letter-spacing: -0.005em; transition: background-color 300ms, color 300ms, border-color 300ms; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.8rem; min-height: 3.4rem; padding: 0 2rem; border: 1px solid var(--color-mar); font-size: 0.7rem; font-weight: 500; letter-spacing: 0.28em; text-transform: uppercase; transition: background-color 400ms, color 400ms, border-color 400ms; }
   .btn-mar { background: var(--color-mar); color: var(--color-sal); }
-  .btn-mar:hover { background: var(--color-mar-2); }
-  .btn-taronja { background: var(--color-sal); color: var(--color-mar); border-color: var(--color-sal); }
-  .btn-taronja:hover { background: transparent; color: var(--color-sal); }
+  .btn-mar:hover { background: var(--color-taronja-2); border-color: var(--color-taronja-2); }
+  .btn-taronja { background: var(--color-taronja-2); border-color: var(--color-taronja-2); color: var(--color-sal); }
+  .btn-taronja:hover { background: var(--color-mar); border-color: var(--color-mar); }
   .btn-line { background: transparent; }
   .btn-line:hover { background: var(--color-mar); color: var(--color-sal); }
-  .fosc .btn-line { border-color: rgb(246 242 235 / 0.5); color: var(--color-sal); }
+  .fosc .btn-line { border-color: rgb(243 236 224 / 0.45); color: var(--color-sal); }
   .fosc .btn-line:hover { background: var(--color-sal); color: var(--color-mar); }
   .btn[disabled], .btn[aria-disabled="true"] { opacity: 0.4; pointer-events: none; }
-  .enllac { display: inline-flex; align-items: center; gap: 0.6rem; border-bottom: 1px solid currentColor; padding-bottom: 0.15rem; font-size: 0.98rem; font-weight: 600; transition: gap 300ms; }
-  .enllac:hover { gap: 1rem; }
-  .camp { display: block; width: 100%; min-height: 2.9rem; border: 0; border-bottom: 1px solid var(--color-linia); background: transparent; padding: 0.5rem 0; font: inherit; color: inherit; transition: border-color 300ms; }
+  .enllac { display: inline-flex; align-items: center; gap: 0.7rem; border-bottom: 1px solid currentColor; padding-bottom: 0.25rem; font-size: 0.7rem; font-weight: 500; letter-spacing: 0.28em; text-transform: uppercase; transition: gap 400ms, color 400ms; }
+  .enllac:hover { gap: 1.1rem; color: var(--color-taronja-2); }
+  .camp { display: block; width: 100%; min-height: 2.9rem; border: 0; border-bottom: 1px solid var(--color-linia); background: transparent; padding: 0.5rem 0; font: inherit; color: inherit; transition: border-color 400ms; }
   .camp:focus { outline: none; border-bottom-color: var(--color-mar); }
 }
 
-/* Aparición: texto que sube y fotos que se descubren */
-.js [data-reveal] { opacity: 0; transform: translate3d(0, 16px, 0); transition: opacity 1100ms cubic-bezier(0.2, 0.7, 0.2, 1), transform 1100ms cubic-bezier(0.2, 0.7, 0.2, 1); transition-delay: calc(var(--i, 0) * 90ms); }
+/* Apariciones lentas */
+.js [data-reveal] { opacity: 0; transform: translate3d(0, 18px, 0); transition: opacity 1300ms cubic-bezier(0.2, 0.7, 0.2, 1), transform 1300ms cubic-bezier(0.2, 0.7, 0.2, 1); transition-delay: calc(var(--i, 0) * 110ms); }
 .js [data-reveal].is-in { opacity: 1; transform: none; }
-.js [data-reveal="foto"] { opacity: 1; transform: none; clip-path: inset(100% 0 0 0); transition: clip-path 1400ms cubic-bezier(0.7, 0, 0.2, 1); transition-delay: calc(var(--i, 0) * 120ms); }
-.js [data-reveal="foto"].is-in { clip-path: inset(0 0 0 0); }
+.js [data-reveal="foto"] { opacity: 0; transform: translate3d(0, 28px, 0) scale(0.98); }
+.js [data-reveal="foto"].is-in { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .js [data-reveal], .js [data-reveal="foto"] { opacity: 1; transform: none; clip-path: none; transition: none; }
+  .js [data-reveal], .js [data-reveal="foto"] { opacity: 1; transform: none; transition: none; }
 }

@@ -1,49 +1,55 @@
 ---
 import { empresa, mailUrl, waUrl } from '../data/empresa';
+import Espiga from './Espiga.astro';
 import { ui, type Lang } from '../i18n/ui';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const tx = ui[lang].contacto;
-const dias = tx.dias;
 ---
 <section id="visita" aria-labelledby="vis-t" class="scroll-mt-20">
-  <div class="mx-auto grid max-w-[90rem] gap-16 px-5 py-24 sm:px-10 sm:py-32 lg:grid-cols-12">
-    <div class="lg:col-span-6">
-      <p class="label hoja text-gris" data-reveal>{tx.label}</p>
-      <h2 id="vis-t" class="titol mt-6 text-[clamp(2.7rem,5.4vw,5rem)]" data-reveal style="--i:1" set:html={tx.h2} />
-      <a href={empresa.maps} target="_blank" rel="noopener" class="group mt-12 block max-w-md border-t border-mar pt-6" data-reveal style="--i:2">
-        <span class="titol block text-[2.2rem] leading-tight">{empresa.street}</span>
-        <span class="mt-1 block text-gris">{empresa.postalCode} {empresa.city}, {empresa.region}</span>
-        <span class="enllac mt-6">{tx.llegar} <span aria-hidden="true">↗</span></span>
-      </a>
-    </div>
-    <div class="grid content-start gap-14 lg:col-span-5 lg:col-start-8 lg:pt-6">
-      <div data-reveal style="--i:1">
-        <p class="label text-gris">{tx.horario}</p>
-        <ol class="mt-5 border-t border-mar" data-semana>
-          {dias.map((d, i) => {
+  <div class="mx-auto max-w-[80rem] px-5 py-28 text-center sm:px-10 sm:py-36">
+    <p class="label text-taronja-2" data-reveal>{tx.label}</p>
+    <h2 id="vis-t" class="titol mt-6 text-[clamp(2.8rem,6vw,5.4rem)] font-light" data-reveal style="--i:1" set:html={tx.h2} />
+    <a href={empresa.maps} target="_blank" rel="noopener" class="group mx-auto mt-10 block w-fit" data-reveal style="--i:2">
+      <span class="cursiva block text-[clamp(1.7rem,3vw,2.3rem)] leading-tight">{empresa.street} · {empresa.postalCode} {empresa.city}</span>
+      <span class="enllac mt-5">{tx.llegar}</span>
+    </a>
+
+    <div class="mx-auto mt-20 grid max-w-5xl gap-14 text-left md:grid-cols-2 md:gap-20">
+      <div data-reveal>
+        <h3 class="filet"><span class="cursiva text-[1.7rem] text-mar">{tx.horario}</span></h3>
+        <ol class="mt-4">
+          {tx.dias.map((d, i) => {
             const dow = (i + 1) % 7;
             const obre = dow >= 2 && dow <= 6;
             return (
-              <li data-dow={dow} class={`dsem flex items-baseline justify-between border-b border-linia py-3 ${obre ? '' : 'tancat text-gris'}`}>
-                <span>{d}</span><span class="num text-[1.2rem]">{obre ? '8:00 – 14:00' : tx.tancat}</span>
+              <li data-dow={dow} class={`dsem flex items-baseline gap-3 py-2.5 ${obre ? '' : 'tancat'}`}>
+                <span class="titol text-[1.35rem]">{d}</span>
+                <span class="mb-[0.3rem] flex-1 border-b border-dotted border-mar/25" aria-hidden="true"></span>
+                <span class="cursiva text-[1.15rem]">{obre ? '8:00 – 14:00' : tx.tancat}</span>
               </li>
             );
           })}
         </ol>
       </div>
-      <ul class="border-t border-mar" data-reveal style="--i:2">
-        <li><a href={waUrl()} target="_blank" rel="noopener" class="contacte"><span class="label text-gris">{tx.wa}</span><span class="titol text-[1.7rem]">{empresa.phone.display}</span></a></li>
-        <li><a href={mailUrl} class="contacte"><span class="label text-gris">{tx.email}</span><span class="titol text-[1.7rem]">{empresa.email}</span></a></li>
-        <li><a href={empresa.instagram.url} target="_blank" rel="noopener" class="contacte"><span class="label text-gris">{tx.ig}</span><span class="titol text-[1.7rem]">{empresa.instagram.handle}</span></a></li>
-      </ul>
+      <div data-reveal style="--i:1">
+        <h3 class="filet"><span class="cursiva text-[1.7rem] text-mar">{tx.escribe}</span></h3>
+        <ul class="mt-4">
+          <li><a href={waUrl()} target="_blank" rel="noopener" class="contacte"><span class="label text-gris">{tx.wa}</span><span class="titol text-[1.5rem]">{empresa.phone.display}</span></a></li>
+          <li><a href={mailUrl} class="contacte"><span class="label text-gris">{tx.email}</span><span class="titol text-[1.5rem]">{empresa.email}</span></a></li>
+          <li><a href={empresa.instagram.url} target="_blank" rel="noopener" class="contacte"><span class="label text-gris">{tx.ig}</span><span class="titol text-[1.5rem]">{empresa.instagram.handle}</span></a></li>
+        </ul>
+        <Espiga class="mt-10 hidden h-24 text-taronja-2/60 md:block" granos={6} />
+      </div>
     </div>
   </div>
 </section>
 <style is:global>
-  #vis-t em { font-style: normal; color: var(--color-taronja-2); }
-  .contacte { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; padding: 1.1rem 0; border-bottom: 1px solid var(--color-linia); transition: padding 400ms cubic-bezier(0.2, 0.7, 0.2, 1); }
-  .contacte:hover { padding-left: 0.6rem; }
-  .dsem.avui { color: var(--color-mar); font-weight: 600; }
-  .dsem.avui > span:first-child::after { content: ' ·'; color: var(--color-taronja); }
+  #vis-t em { color: var(--color-taronja-2); }
+  .contacte { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid var(--color-linia); transition: color 400ms; }
+  .contacte:hover { color: var(--color-taronja-2); }
+  .dsem.tancat { color: var(--color-gris); }
+  .dsem.avui .titol { color: var(--color-taronja-2); }
+  .dsem.avui .titol::after { content: ' · hoy'; font-style: italic; font-weight: 400; font-size: 1.05rem; }
+  :lang(en) .dsem.avui .titol::after { content: ' · today'; }
 </style>
