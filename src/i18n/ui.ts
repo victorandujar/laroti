@@ -1,0 +1,120 @@
+/** Textos en castellano (por defecto, en /) e inglés (en /en): en Mallorca hay mucho cliente extranjero. */
+export type Lang = 'es' | 'en';
+export const home = (lang: Lang) => (lang === 'en' ? '/en' : '/');
+
+const es = {
+  meta: { title: 'Larotî · Micropanadería y obrador abierto en Campos, Mallorca', description: 'Pan fresco de masa madre y harina eco en Campos, Mallorca. Mira qué hay hoy en el mostrador y reserva tu pan para recogerlo. De martes a sábado, de 8 a 14 h.' },
+  skip: 'Saltar al contenido', demo: 'Propuesta de diseño no oficial', demoBy: 'Preparada por Ammavaroo para',
+  nav: { hoy: 'Hoy', reserva: 'Reservar', granos: 'Granos antiguos', productos: 'La carta', contacto: 'Visítanos', principal: 'Principal', idioma: 'Idioma', btn: 'Reservar' },
+  hero: {
+    eyebrow: 'Micropanadería · obrador abierto · Campos, Mallorca',
+    l1: 'Pan de masa madre,', l2: 'hecho a la vista.',
+    caps: ['Clásico, hogaza de 850 g', 'Kamut, grano antiguo de Manacor', 'Cruasán, del obrador'],
+    enMostrador: 'productos hoy en el mostrador',
+    text: 'Micropanadería familiar en Campos, Mallorca. Harina ecológica, granos antiguos de la isla y un obrador abierto donde todo se hace delante de ti.',
+    cta: 'Reservar pan', hoy: 'Hoy en el obrador',
+  },
+  estado: { abierto: 'Abierto', cerrado: 'Cerrado', hasta: 'hasta las 14:00', abrimos: 'Abrimos', hoy: 'hoy a las 8:00', alas: 'a las 8:00', horario: 'Martes a sábado' },
+  hoy: {
+    label: 'Hoy en el mostrador', h2: 'Del horno, <em>esta mañana.</em>',
+    reservar: 'Reservar para otro día', ver: 'Ver reserva', anadido: (n: string) => `${n}, añadido a tu reserva.`,
+    text: 'Lo actualizamos desde el obrador a medida que sale del horno y se va acabando. Si algo vuela, resérvalo para otro día.',
+    cerrado: 'Hoy descansamos. Esto es lo que había el último día de obrador.',
+    disp: { hay: 'Disponible', pocos: 'Últimas piezas', agotado: 'Agotado' },
+    nada: 'Todavía no ha salido nada del horno.',
+    nota: 'Resérvalo para otro día',
+  },
+  reserva: {
+    label: 'Reservas', h2: 'Te lo <em>guardamos.</em>',
+    text: 'Elige el día, añade lo que quieras y pásate a recogerlo de 8 a 14 h. Se paga en la tienda.',
+    dia: '¿Qué día pasas?', que: '¿Qué te guardamos?', resumen: 'Tu reserva',
+    vacio: 'Todavía no has añadido nada.', piezas: (n: number) => (n === 1 ? '1 pieza' : `${n} piezas`),
+    nombre: 'Nombre', telefono: 'Teléfono', nota: 'Nota', opcional: '(opcional)',
+    cta: 'Confirmar reserva', demo: 'Esto es una demostración: la reserva no se envía a nadie y se guarda solo en este navegador.',
+    eNombre: 'Dinos tu nombre para apuntar la reserva.', eTel: 'Necesitamos un teléfono válido para confirmártela.', eVacio: 'Añade al menos un producto.',
+    ok: 'Reserva apuntada', gracias: '¡Gracias,', codigo: 'Tu código de recogida', recoge: 'Recogida:', de8a14: 'de 8 a 14 h', paga: 'Se paga en la tienda.',
+    wa: 'Enviar la reserva por WhatsApp', panel: 'Ver cómo le llega al obrador →', otra: 'Hacer otra reserva',
+    msg: (n: string) => `Hola, soy ${n}. Quiero reservar en Larotî:`, msgDia: 'Recogida:', msgCod: 'Código:', msgNota: 'Nota:',
+  },
+  granos: {
+    label: 'Granos antiguos', h2: 'Trigos de antes, <em>de la isla.</em>',
+    text: 'Con menos gluten y otro sabor. La xeixa, el Kamut y el Senatore Cappelli llegan molidos a la piedra desde una finca de Manacor.',
+    finca: 'Finca Bellver Ric · Manacor',
+  },
+  productos: { label: 'La carta', h2: 'Panes, laminados <em>y algo dulce.</em>', sinGlutenCorto: 'Sin gluten', sub: 'Todo sale de nuestro obrador, con masa madre y harina eco.', sinGluten: 'naturalmente sin gluten', nota: 'Los productos «naturalmente sin gluten» se hacen en un obrador donde se trabaja con gluten: no son aptos para celíacos.', todo: 'Todo', ver: 'Ingredientes' },
+  obrador: {
+    label: 'El obrador', h2: 'Un obrador <em>abierto.</em>', alt1: 'Hogazas en la estantería de Larotî', alt2: 'Cruasán de Larotî',
+    p1: 'Tenemos un par de mesas para tomar un café mientras se forman los panes. Trabajamos con harinas ecológicas, masa madre y tiempo.',
+    p2: 'Además del pan encontrarás laminados, dulces, salados y una selección de productos de la isla.',
+    ceramica: 'Cerámica de Isabella Avalos', ceramicaT: 'Piezas únicas hechas a mano por una artesana de Campos, a la venta en la micropanadería. Isabella también da clases en su casa.',
+    puntos: ['Harinas ecológicas', 'Masa madre', 'Granos de Mallorca', 'Empresa familiar'],
+  },
+  contacto: {
+    label: 'Visítanos', h2: 'Te esperamos <em>en Campos.</em>',
+    horario: 'Horario', dias: ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'], tancat: 'Cerrado',
+    llegar: 'Cómo llegar', donde: 'Dónde', wa: 'WhatsApp y teléfono', email: 'Email', ig: 'Instagram',
+  },
+  footer: { desc: 'Micropanadería y tienda gourmet · Campos, Mallorca', panel: 'Panel del obrador (demo)', avis: 'Aviso legal', priv: 'Privacidad' },
+  barra: 'Ver mi reserva',
+  anadir: 'Añadir', quitar: 'Quitar una', mas: 'Añadir una',
+};
+type Textos = typeof es;
+
+const en: Textos = {
+  meta: { title: 'Larotî · Micro-bakery and open workshop in Campos, Mallorca', description: 'Fresh sourdough bread made with organic flour in Campos, Mallorca. See what is on the counter today and reserve your loaf for pickup. Tuesday to Saturday, 8 am to 2 pm.' },
+  skip: 'Skip to content', demo: 'Unofficial design proposal', demoBy: 'Prepared by Ammavaroo for',
+  nav: { hoy: 'Today', reserva: 'Reserve', granos: 'Ancient grains', productos: 'Menu', contacto: 'Visit us', principal: 'Main', idioma: 'Language', btn: 'Reserve' },
+  hero: {
+    eyebrow: 'Micro-bakery · open workshop · Campos, Mallorca',
+    l1: 'Sourdough bread,', l2: 'made in plain sight.',
+    caps: ['Clásico, 850 g loaf', 'Kamut, ancient grain from Manacor', 'Croissant, from the workshop'],
+    enMostrador: 'items on the counter today',
+    text: 'A family micro-bakery in Campos, Mallorca. Organic flour, ancient grains from the island and an open workshop where everything is made in front of you.',
+    cta: 'Reserve bread', hoy: 'Today at the bakery',
+  },
+  estado: { abierto: 'Open', cerrado: 'Closed', hasta: 'until 2 pm', abrimos: 'We open', hoy: 'today at 8 am', alas: 'at 8 am', horario: 'Tuesday to Saturday' },
+  hoy: {
+    label: 'On the counter today', h2: 'From the oven, <em>this morning.</em>',
+    reservar: 'Reserve for another day', ver: 'See reservation', anadido: (n: string) => `${n} added to your reservation.`,
+    text: 'We update it from the workshop as things come out of the oven and sell out. If something goes fast, reserve it for another day.',
+    cerrado: 'We are closed today. This is what we had on our last baking day.',
+    disp: { hay: 'Available', pocos: 'Last few', agotado: 'Sold out' },
+    nada: 'Nothing has come out of the oven yet.',
+    nota: 'Reserve it for another day',
+  },
+  reserva: {
+    label: 'Reservations', h2: 'We will <em>keep it</em> for you.',
+    text: 'Pick a day, add what you would like and collect it between 8 am and 2 pm. You pay in the shop.',
+    dia: 'Which day will you come?', que: 'What shall we keep for you?', resumen: 'Your reservation',
+    vacio: 'Nothing added yet.', piezas: (n: number) => (n === 1 ? '1 item' : `${n} items`),
+    nombre: 'Name', telefono: 'Phone', nota: 'Note', opcional: '(optional)',
+    cta: 'Confirm reservation', demo: 'This is a demo: the reservation is not sent to anyone and is stored only in this browser.',
+    eNombre: 'Tell us your name so we can note the reservation.', eTel: 'We need a valid phone number to confirm it.', eVacio: 'Add at least one item.',
+    ok: 'Reservation noted', gracias: 'Thank you,', codigo: 'Your pickup code', recoge: 'Pickup:', de8a14: '8 am to 2 pm', paga: 'You pay in the shop.',
+    wa: 'Send the reservation by WhatsApp', panel: 'See how the bakery receives it →', otra: 'Make another reservation',
+    msg: (n: string) => `Hi, I am ${n}. I would like to reserve at Larotî:`, msgDia: 'Pickup:', msgCod: 'Code:', msgNota: 'Note:',
+  },
+  granos: {
+    label: 'Ancient grains', h2: 'Old wheats, <em>from the island.</em>',
+    text: 'Less gluten and a different flavour. Xeixa, Kamut and Senatore Cappelli arrive stone-milled from a farm in Manacor.',
+    finca: 'Finca Bellver Ric · Manacor',
+  },
+  productos: { label: 'The menu', h2: 'Breads, pastries <em>and something sweet.</em>', sinGlutenCorto: 'Gluten-free', sub: 'Everything comes from our workshop, with sourdough and organic flour.', sinGluten: 'naturally gluten-free', nota: '“Naturally gluten-free” products are made in a workshop that handles gluten: they are not suitable for coeliacs.', todo: 'All', ver: 'Ingredients' },
+  obrador: {
+    label: 'The workshop', h2: 'An <em>open</em> workshop.', alt1: 'Loaves on the shelf at Larotî', alt2: 'Croissant from Larotî',
+    p1: 'We have a couple of tables for a coffee while the loaves are shaped. We work with organic flours, sourdough and time.',
+    p2: 'Besides bread you will find pastries, sweet and savoury bakes and a selection of products from the island.',
+    ceramica: 'Ceramics by Isabella Avalos', ceramicaT: 'One-of-a-kind pieces handmade by an artisan from Campos, for sale at the micro-bakery. Isabella also gives classes at her home.',
+    puntos: ['Organic flours', 'Sourdough', 'Mallorcan grains', 'Family business'],
+  },
+  contacto: {
+    label: 'Visit us', h2: 'See you <em>in Campos.</em>',
+    horario: 'Opening hours', dias: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'], tancat: 'Closed',
+    llegar: 'Get directions', donde: 'Where', wa: 'WhatsApp and phone', email: 'Email', ig: 'Instagram',
+  },
+  footer: { desc: 'Micro-bakery and gourmet shop · Campos, Mallorca', panel: 'Bakery panel (demo)', avis: 'Legal notice', priv: 'Privacy' },
+  barra: 'See my reservation',
+  anadir: 'Add', quitar: 'Remove one', mas: 'Add one',
+};
+
+export const ui: Record<Lang, Textos> = { es, en };
