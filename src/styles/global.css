@@ -3,7 +3,7 @@
 /*
   Larotî · dirección «mallorquina artesanal».
   Papel de marés, tinta marrón, terracota de baldosa y verde algarrobo.
-  Serif fina (Cormorant Garamond) para la voz; Jost para el texto y las etiquetas.
+  Serif clásica (EB Garamond) para la voz; Jost para el texto y las etiquetas.
   Arcos de finca para las fotos, filetes finos y espigas a línea.
 */
 @theme {
@@ -24,7 +24,7 @@
   --color-salvia-2: #d3d2bb;
   --color-preseg: #efe2d2;
   --font-sans: "Jost Variable", ui-sans-serif, system-ui, sans-serif;
-  --font-serif: "Cormorant Garamond", ui-serif, Georgia, serif;
+  --font-serif: "EB Garamond Variable", ui-serif, Georgia, serif;
   --font-mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
 }
 
@@ -37,13 +37,10 @@ body::after { content: ''; position: fixed; inset: 0; z-index: 70; pointer-event
 :focus-visible { outline: 1px solid var(--color-taronja-2); outline-offset: 4px; }
 .fosc :focus-visible { outline-color: var(--color-taronja); }
 
-.titol { font-family: var(--font-serif); font-weight: 400; letter-spacing: -0.012em; line-height: 1; }
+.titol { font-family: var(--font-serif); font-weight: 400; letter-spacing: -0.02em; line-height: 1.02; }
 .titol em { font-style: italic; font-weight: 400; }
 .label { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.3em; text-transform: uppercase; }
 .num { font-family: var(--font-serif); font-variant-numeric: lining-nums; }
-/* «î» del logotipo: Cormorant coloca mal el circunflejo sobre la i, así que se dibuja aparte */
-.i-circ { position: relative; display: inline-block; }
-.i-circ::after { content: ''; position: absolute; left: 50%; top: 0.2em; width: 0.17em; height: 0.17em; translate: -50% 0; border: solid currentColor; border-width: 0.05em 0 0 0.05em; rotate: 45deg; }
 .cursiva { font-family: var(--font-serif); font-style: italic; }
 
 /* Arco de finca: foto con remate de medio punto y filete fino separado */

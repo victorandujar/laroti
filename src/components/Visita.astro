@@ -9,7 +9,7 @@ const tx = ui[lang].contacto;
 <section id="visita" aria-labelledby="vis-t" class="scroll-mt-20">
   <div class="mx-auto max-w-[80rem] px-5 py-28 text-center sm:px-10 sm:py-36">
     <p class="label text-taronja-2" data-reveal>{tx.label}</p>
-    <h2 id="vis-t" class="titol mt-6 text-[clamp(2.8rem,6vw,5.4rem)] font-light" data-reveal style="--i:1" set:html={tx.h2} />
+    <h2 id="vis-t" class="titol mt-6 text-[clamp(2.8rem,6vw,5.4rem)]" data-reveal style="--i:1" set:html={tx.h2} />
     <a href={empresa.maps} target="_blank" rel="noopener" class="group mx-auto mt-10 block w-fit" data-reveal style="--i:2">
       <span class="cursiva block text-[clamp(1.7rem,3vw,2.3rem)] leading-tight">{empresa.street} · {empresa.postalCode} {empresa.city}</span>
       <span class="enllac mt-5">{tx.llegar}</span>

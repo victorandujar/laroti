@@ -18,7 +18,7 @@ const tx = ui[lang];
   <div class="mx-auto max-w-[88rem] px-5 pt-16 text-center sm:px-10 sm:pt-24">
     <Espiga class="mx-auto mb-7 h-14 text-taronja-2" granos={5} />
     <p class="label text-taronja-2">{tx.hero.eyebrow}</p>
-    <h1 id="hero-t" class="titol mx-auto mt-8 max-w-[15ch] text-[clamp(3.3rem,8.2vw,8.4rem)] font-light leading-[0.94]" set:html={tx.hero.h1} />
+    <h1 id="hero-t" class="titol mx-auto mt-8 max-w-[15ch] text-[clamp(3.3rem,8.2vw,8.4rem)] leading-[0.94]" set:html={tx.hero.h1} />
     <p class="mx-auto mt-8 max-w-[34rem] text-[1.08rem] text-gris">{tx.hero.text}</p>
     <div class="mt-10 flex flex-wrap items-center justify-center gap-x-9 gap-y-5">
       <a href={`${home(lang)}#reserva`} class="btn btn-mar">{tx.hero.cta}</a>
@@ -29,6 +29,7 @@ const tx = ui[lang];
       <span data-e1 class="text-mar">{tx.estado.horario}</span><span aria-hidden="true">·</span><span data-e2></span>
       <span aria-hidden="true">·</span><span>{empresa.street}, {empresa.city}</span>
     </p>
+    <p class="cursiva mt-2 text-[1.1rem] text-taronja-2">{tx.mercado}</p>
   </div>
 
   <div class="relative mx-auto mt-20 max-w-[76rem] px-5 pb-24 sm:mt-24 sm:px-10 sm:pb-32">
@@ -41,7 +42,17 @@ const tx = ui[lang];
       </li>
       <li class="col-span-12 sm:col-span-4">
         <figure>
+          <div class="relative">
+          <svg viewBox="0 0 200 200" class="sello absolute -right-8 -top-8 z-10 size-32 sm:-right-12 sm:-top-6 sm:size-36" aria-hidden="true">
+            <defs><path id="cercle" d="M100 100 m-74 0 a74 74 0 1 1 148 0 a74 74 0 1 1 -148 0" /></defs>
+            <circle cx="100" cy="100" r="96" fill="var(--color-sal)" />
+            <circle cx="100" cy="100" r="90" fill="none" stroke="var(--color-linia)" />
+            <g class="gira"><text class="sello-txt"><textPath href="#cercle" textLength="462">{tx.sello}</textPath></text></g>
+            <text x="100" y="98" text-anchor="middle" class="sello-any">2022</text>
+            <text x="100" y="122" text-anchor="middle" class="sello-sub">Campos</text>
+          </svg>
           <div class="arc" data-reveal="foto"><div class="arc-in"><Image src={clasico} alt={tx.hero.caps[0]} widths={[400, 640, 900]} sizes="(min-width: 640px) 28vw, 90vw" loading="eager" fetchpriority="high" class="aspect-[3/4.3] w-full object-cover" /></div></div>
+          </div>
           <figcaption class="cursiva mt-6 text-center text-[1.1rem] text-gris">{tx.hero.caps[0]}</figcaption>
         </figure>
       </li>
@@ -63,4 +74,11 @@ const tx = ui[lang];
     @keyframes late { 0% { opacity: 0.9; transform: scale(0.4); } 100% { opacity: 0; transform: scale(2); } }
   }
 </style>
-<style is:global>#hero-t em { color: var(--color-taronja-2); }</style>
+<style is:global>
+  #hero-t em { color: var(--color-taronja-2); }
+  .sello-txt { font-family: var(--font-sans); font-size: 12.5px; font-weight: 500; letter-spacing: 0.24em; text-transform: uppercase; fill: var(--color-mar); }
+  .sello-any { font-family: var(--font-serif); font-size: 44px; font-style: italic; fill: var(--color-taronja-2); }
+  .sello-sub { font-family: var(--font-sans); font-size: 10px; font-weight: 500; letter-spacing: 0.3em; text-transform: uppercase; fill: var(--color-gris); }
+  .gira { transform-origin: 100px 100px; }
+  @media (prefers-reduced-motion: no-preference) { .gira { animation: gira 40s linear infinite; } @keyframes gira { to { transform: rotate(360deg); } } }
+</style>

@@ -19,12 +19,20 @@ En la demo todo se guarda solo en el navegador (`localStorage`): no se envía ni
 
 ## Diseño
 
-- **Criterio:** editorial y sobrio, con fotografía nítida, jerarquía clara y lo útil en la primera pantalla (abierto o cerrado, dirección, cuántos productos hay hoy).
-- **Tipografía:** Syne (titulares) y Albert Sans (texto), autoalojadas.
-- **Color:** papel cálido y la tinta azul noche de su emblema. Cada sección lleva un tono suave de su logo: salvia en «Hoy» y melocotón en «La carta». El naranja va solo como acento.
+- **Dirección:** mallorquina artesanal. Papel de marés con grano, fotos en arco de finca con filete fino, espigas dibujadas a línea y composición centrada, como una carta impresa.
+- **Tipografía:** EB Garamond (titulares) y Jost (texto), autoalojadas.
+- **Color:** papel, tinta marrón, terracota y verde algarrobo para las secciones oscuras.
+- **Detalles de su historia:** sello «Desde 2022», aviso de los días de mercado, línea de tiempo de Dubái a la calle Convent y un mapa de «su Mallorca» (Campos, Manacor, Palma y Es Trenc).
 - **Marca:** su emblema en la cabecera y una de sus hojas como pequeño icono en las etiquetas de sección.
 - **Detalles de uso:** el mostrador se desplaza en horizontal; al reservar desde él sale un aviso discreto; en escritorio, al pasar por la carta aparece la foto del producto junto al cursor.
 - Castellano en `/` e inglés en `/en` (mucho cliente extranjero en Mallorca).
+
+## Su historia (fuentes)
+
+- **El Amasadero** (entrevista, 8/5/2025): el proyecto nace en 2015 en Dubái; Larotî tuvo nombre y logo antes que local; obrador y tienda abren en junio de 2022; animan a reservar porque producen poco.
+- **Eat Drink Sleep Mallorca** (15/4/2024): Juan Ocampo fue chef de Tess de Mar, en Campos; cola los días de mercado; chocolate Maüa; idea de picnic en Es Trenc.
+- **TravelToZero**: lo llevan Ana y Juan; harinas ecológicas de Roca Fariners.
+- No se ha encontrado qué significa el nombre «Larotî»: la web no lo explica ni se inventa.
 
 ## Contenido y fuentes
 
