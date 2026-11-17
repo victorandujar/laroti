@@ -1,0 +1,13 @@
+---
+import { empresa } from '../data/empresa';
+interface Props { description: string; lang: string }
+const { description, lang } = Astro.props;
+const data = {
+  '@context': 'https://schema.org', '@type': 'Bakery', name: empresa.name, description, inLanguage: lang, url: Astro.site?.href,
+  telephone: empresa.phone.e164, email: empresa.email,
+  address: { '@type': 'PostalAddress', streetAddress: empresa.street, postalCode: empresa.postalCode, addressLocality: empresa.city, addressRegion: 'Illes Balears', addressCountry: 'ES' },
+  openingHoursSpecification: [{ '@type': 'OpeningHoursSpecification', dayOfWeek: ['Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'], opens: '08:00', closes: '14:00' }],
+  sameAs: [empresa.instagram.url],
+};
+---
+<script type="application/ld+json" set:html={JSON.stringify(data)} />
