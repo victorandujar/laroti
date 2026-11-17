@@ -1,0 +1,95 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import { categorias, productos } from '../data/productos';
+---
+<Base title="Panel del obrador · Larotî" description="Panel de gestión: tablón «Hoy en tienda» y reservas (demostración).">
+  <meta slot="head" name="robots" content="noindex, nofollow" />
+  <Header panel />
+  <main id="contenido" class="mx-auto max-w-[84rem] px-4 pb-24 pt-8 sm:px-8">
+    <p class="border border-taronja bg-[#fdf0dc] px-4 py-3 text-sm"><strong>Demostración del panel.</strong> Las reservas marcadas «ejemplo» son inventadas. Las que hagas desde la web de la demo aparecen aquí, y todo se guarda solo en este navegador. <button type="button" data-reiniciar class="font-semibold underline underline-offset-4">Reiniciar la demo</button></p>
+
+    <div class="mt-8 grid gap-10 lg:grid-cols-12">
+      <!-- Tablón -->
+      <section aria-labelledby="tab-t" class="lg:col-span-5">
+        <p class="label text-taronja-2">Lo ven los clientes en la web</p>
+        <h1 id="tab-t" class="titol mt-3 text-[clamp(2rem,4.4vw,3.2rem)]">Hoy en tienda</h1>
+        <p class="mt-2 text-gris">Toca el estado de cada producto según sale del horno o se acaba. La web se actualiza al momento.</p>
+        <div class="mt-4 flex flex-wrap gap-2 text-sm">
+          <button type="button" data-todo="hay" class="btn btn-line min-h-10 px-4">Todo «Hay»</button>
+          <button type="button" data-todo="no" class="btn btn-line min-h-10 px-4">Vaciar el mostrador</button>
+        </div>
+        {categorias.map((c) => (
+          <div class="mt-6">
+            <p class="label text-gris">{c.es}</p>
+            <ul class="mt-2 divide-y divide-linia bg-white ring-1 ring-linia">
+              {productos.filter((p) => p.cat === c.id).map((p) => (
+                <li data-fila={p.id} class="flex flex-wrap items-center justify-between gap-x-3 gap-y-2 px-4 py-2.5">
+                  <span class="font-semibold">{p.nombre}</span>
+                  <span class="seg" role="group" aria-label={`Estado de ${p.nombre}`}>
+                    {[['hay', 'Hay'], ['pocos', 'Pocos'], ['agotado', 'Agotado'], ['no', 'Hoy no']].map(([k, t]) => <button type="button" data-set={k} aria-pressed="false">{t}</button>)}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </section>
+
+      <!-- Reservas -->
+      <section aria-labelledby="res-t" class="lg:col-span-7">
+        <p class="label text-taronja-2">Para apartar</p>
+        <h2 id="res-t" class="titol mt-3 text-[clamp(2rem,4.4vw,3.2rem)]">Reservas</h2>
+        <div data-dias class="mt-4 flex flex-wrap gap-2"></div>
+
+        <dl class="mt-5 grid grid-cols-3 gap-3">
+          {[['reservas', 'Reservas'], ['piezas', 'Piezas a apartar'], ['pendientes', 'Por recoger']].map(([k, t]) => (
+            <div class="rounded-2xl bg-white p-4 ring-1 ring-linia"><dt class="text-sm text-gris">{t}</dt><dd data-kpi={k} class="titol mt-1 text-3xl tabular-nums">0</dd></div>
+          ))}
+        </dl>
+
+        <div class="fosc mt-5 bg-mar p-5 text-sal">
+          <h3 class="titol text-xl">Para apartar <span data-dia-txt class="text-taronja"></span></h3>
+          <ul data-apartar class="mt-3 flex flex-wrap gap-2"></ul>
+        </div>
+
+        <ul data-reservas class="mt-5 grid gap-3"></ul>
+
+        <details class="mt-8 bg-white p-5 ring-1 ring-linia sm:p-6">
+          <summary class="cursor-pointer text-lg font-semibold">+ Apuntar una reserva a mano</summary>
+          <p class="mt-2 text-sm text-gris">Para las que llegan por WhatsApp, Instagram o en el mostrador. Se apunta en el día seleccionado.</p>
+          <form data-manual class="mt-5 grid gap-4" novalidate>
+            <div class="grid gap-4 sm:grid-cols-3">
+              <label class="block text-sm font-semibold">Nombre<input name="nombre" required maxlength="60" class="camp mt-1.5" /></label>
+              <label class="block text-sm font-semibold">Teléfono<input name="telefono" type="tel" maxlength="20" class="camp mt-1.5" /></label>
+              <label class="block text-sm font-semibold">Canal<select name="canal" class="camp mt-1.5"><option value="whatsapp">WhatsApp</option><option value="instagram">Instagram</option><option value="tienda">En tienda</option></select></label>
+            </div>
+            <div data-filas class="grid gap-2"></div>
+            <template data-fila-tpl>
+              <div class="grid grid-cols-[1fr_4.5rem] items-center gap-2">
+                <select data-m-prod class="camp" aria-label="Producto">{productos.map((p) => <option value={p.id}>{p.nombre}</option>)}</select>
+                <input data-m-qty type="number" min="1" max="20" value="1" class="camp" aria-label="Cantidad" />
+              </div>
+            </template>
+            <button type="button" data-otra class="w-fit text-sm font-semibold text-taronja-2 underline underline-offset-4">+ Añadir otro producto</button>
+            <button type="submit" class="btn btn-taronja w-full sm:w-fit">Apuntar reserva</button>
+          </form>
+        </details>
+      </section>
+    </div>
+  </main>
+  <script>
+    import '../scripts/gestion';
+  </script>
+</Base>
+<style is:global>
+  .seg { display: inline-flex; overflow: hidden; border: 1px solid var(--color-linia); font-size: 0.8rem; font-weight: 700; }
+  .seg button { min-height: 2.3rem; padding: 0 0.7rem; transition: background-color 150ms, color 150ms; }
+  .seg button + button { border-left: 1.5px solid var(--color-linia); }
+  .seg button[aria-pressed="true"][data-set="hay"] { background: var(--color-verd); color: #fff; }
+  .seg button[aria-pressed="true"][data-set="pocos"] { background: var(--color-taronja); color: var(--color-mar); }
+  .seg button[aria-pressed="true"][data-set="agotado"] { background: var(--color-mar); color: var(--color-sal); }
+  .seg button[aria-pressed="true"][data-set="no"] { background: var(--color-sal-2); color: var(--color-gris); }
+  .pdia { min-height: 2.5rem; padding: 0 1rem; border: 1px solid var(--color-linia); background: #fff; font-weight: 700; font-size: 0.92rem; }
+  .pdia[aria-pressed="true"] { background: var(--color-mar); border-color: var(--color-mar); color: var(--color-sal); }
+</style>
