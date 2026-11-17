@@ -1,8 +1,11 @@
 ---
 import '../styles/global.css';
-import '@fontsource-variable/albert-sans';
-import '@fontsource-variable/syne';
-import font from '@fontsource-variable/syne/files/syne-latin-wght-normal.woff2?url';
+import '@fontsource-variable/jost';
+import '@fontsource/cormorant-garamond/300.css';
+import '@fontsource/cormorant-garamond/400.css';
+import '@fontsource/cormorant-garamond/400-italic.css';
+import '@fontsource/cormorant-garamond/500.css';
+import font from '@fontsource/cormorant-garamond/files/cormorant-garamond-latin-300-normal.woff2?url';
 import Seo from '../components/Seo.astro';
 import { isDemo } from '../lib/site';
 import { empresa } from '../data/empresa';
@@ -18,7 +21,7 @@ const tx = ui[lang];
     <meta charset="utf-8" />
     <script is:inline>document.documentElement.classList.add('js')</script>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#161b27" />
+    <meta name="theme-color" content="#303a2b" />
     <link rel="preload" href={font} as="font" type="font/woff2" crossorigin />
     <link rel="icon" href="/favicon.png" type="image/png" />
     <link rel="sitemap" href="/sitemap-index.xml" />
@@ -30,8 +33,8 @@ const tx = ui[lang];
   <body class="min-h-dvh">
     <a href="#contenido" class="sr-only focus:not-sr-only focus:fixed focus:left-3 focus:top-3 focus:z-[100] focus:bg-mar focus:px-4 focus:py-2 focus:text-white">{tx.skip}</a>
     {isDemo && (
-      <aside aria-label={tx.demo} class="relative z-50 bg-mar text-sal">
-        <p class="mx-auto max-w-[90rem] px-4 py-2 text-center text-[0.78rem] text-sal/75">{tx.demo}<span class="hidden sm:inline"> · {tx.demoBy} {empresa.name}</span></p>
+      <aside aria-label={tx.demo} class="relative z-50 bg-garrover text-sal">
+        <p class="label mx-auto max-w-[90rem] px-4 py-2 text-center text-[0.6rem] text-sal/70">{tx.demo}<span class="hidden sm:inline"> · {tx.demoBy} {empresa.name}</span></p>
       </aside>
     )}
     <slot />
