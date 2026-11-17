@@ -1,0 +1,11 @@
+---
+import Legal from '../layouts/Legal.astro';
+import { empresa } from '../data/empresa';
+---
+<Legal title="Privacidad">
+  <h2>Datos que tratamos</h2>
+  <p>Al reservar pedimos nombre y teléfono, y los usamos únicamente para preparar y confirmar esa reserva. No hay cookies de seguimiento ni cuentas de usuario.</p>
+  <p><strong>En esta demostración</strong> las reservas no se envían a ningún sitio: se guardan solo en tu navegador.</p>
+  <h2>Responsable</h2>
+  <p>{empresa.name} · {empresa.email}. Puedes pedir el acceso, la rectificación o la supresión de tus datos escribiendo a ese email.</p>
+</Legal>

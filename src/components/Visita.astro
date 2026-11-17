@@ -1,0 +1,49 @@
+---
+import { empresa, mailUrl, waUrl } from '../data/empresa';
+import { ui, type Lang } from '../i18n/ui';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const tx = ui[lang].contacto;
+const dias = tx.dias;
+---
+<section id="visita" aria-labelledby="vis-t" class="scroll-mt-20">
+  <div class="mx-auto grid max-w-[90rem] gap-16 px-5 py-24 sm:px-10 sm:py-32 lg:grid-cols-12">
+    <div class="lg:col-span-6">
+      <p class="label hoja text-gris" data-reveal>{tx.label}</p>
+      <h2 id="vis-t" class="titol mt-6 text-[clamp(2.7rem,5.4vw,5rem)]" data-reveal style="--i:1" set:html={tx.h2} />
+      <a href={empresa.maps} target="_blank" rel="noopener" class="group mt-12 block max-w-md border-t border-mar pt-6" data-reveal style="--i:2">
+        <span class="titol block text-[2.2rem] leading-tight">{empresa.street}</span>
+        <span class="mt-1 block text-gris">{empresa.postalCode} {empresa.city}, {empresa.region}</span>
+        <span class="enllac mt-6">{tx.llegar} <span aria-hidden="true">↗</span></span>
+      </a>
+    </div>
+    <div class="grid content-start gap-14 lg:col-span-5 lg:col-start-8 lg:pt-6">
+      <div data-reveal style="--i:1">
+        <p class="label text-gris">{tx.horario}</p>
+        <ol class="mt-5 border-t border-mar" data-semana>
+          {dias.map((d, i) => {
+            const dow = (i + 1) % 7;
+            const obre = dow >= 2 && dow <= 6;
+            return (
+              <li data-dow={dow} class={`dsem flex items-baseline justify-between border-b border-linia py-3 ${obre ? '' : 'tancat text-gris'}`}>
+                <span>{d}</span><span class="num text-[1.2rem]">{obre ? '8:00 – 14:00' : tx.tancat}</span>
+              </li>
+            );
+          })}
+        </ol>
+      </div>
+      <ul class="border-t border-mar" data-reveal style="--i:2">
+        <li><a href={waUrl()} target="_blank" rel="noopener" class="contacte"><span class="label text-gris">{tx.wa}</span><span class="titol text-[1.7rem]">{empresa.phone.display}</span></a></li>
+        <li><a href={mailUrl} class="contacte"><span class="label text-gris">{tx.email}</span><span class="titol text-[1.7rem]">{empresa.email}</span></a></li>
+        <li><a href={empresa.instagram.url} target="_blank" rel="noopener" class="contacte"><span class="label text-gris">{tx.ig}</span><span class="titol text-[1.7rem]">{empresa.instagram.handle}</span></a></li>
+      </ul>
+    </div>
+  </div>
+</section>
+<style is:global>
+  #vis-t em { font-style: normal; color: var(--color-taronja-2); }
+  .contacte { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; padding: 1.1rem 0; border-bottom: 1px solid var(--color-linia); transition: padding 400ms cubic-bezier(0.2, 0.7, 0.2, 1); }
+  .contacte:hover { padding-left: 0.6rem; }
+  .dsem.avui { color: var(--color-mar); font-weight: 600; }
+  .dsem.avui > span:first-child::after { content: ' ·'; color: var(--color-taronja); }
+</style>
