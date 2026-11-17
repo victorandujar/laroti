@@ -1,0 +1,66 @@
+@import "tailwindcss";
+
+/*
+  Dirección premium y editorial: papel cálido, tinta azul noche (la de su emblema),
+  serif fina, líneas de 1 px y el naranja de la marca solo como acento.
+*/
+@theme {
+  --color-sal: #f6f2eb;
+  --color-sal-2: #ede7dc;
+  --color-linia: #dcd4c6;
+  --color-mar: #161b27;
+  --color-mar-2: #222938;
+  --color-verd: #3f7a52;
+  --color-taronja: #d98a37;
+  --color-taronja-2: #a35a1d;
+  --color-pruna: #e3a487;
+  --color-gris: #6a665e;
+  --color-salvia: #e3ebe1;
+  --color-salvia-2: #c9d9c6;
+  --color-preseg: #f5e4d8;
+  --font-sans: "Albert Sans Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Syne Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+}
+
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body { background: var(--color-sal); color: var(--color-mar); font-family: var(--font-sans); font-size: 1.0625rem; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+::selection { background: var(--color-mar); color: var(--color-sal); }
+:focus-visible { outline: 1.5px solid var(--color-taronja-2); outline-offset: 4px; }
+.fosc :focus-visible { outline-color: var(--color-taronja); }
+
+.titol { font-family: var(--font-serif); font-weight: 600; letter-spacing: -0.045em; line-height: 0.96; }
+/* Máscara con la forma de una hoja del emblema */
+.fulla { -webkit-mask: var(--hoja) center / 100% 100% no-repeat; mask: var(--hoja) center / 100% 100% no-repeat; }
+.titol em { font-style: normal; }
+/* Etiqueta: una hoja pequeña del emblema delante, en minúscula normal */
+.label { display: inline-flex; align-items: center; gap: 0.55rem; font-size: 0.92rem; font-weight: 600; letter-spacing: -0.005em; }
+.label.hoja::before { content: ''; width: 0.8rem; height: 0.8rem; flex: none; background: currentColor; -webkit-mask: url(/hojas/h4.svg) center / contain no-repeat; mask: url(/hojas/h4.svg) center / contain no-repeat; }
+.num { font-family: var(--font-serif); font-weight: 600; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
+
+@layer components {
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.75rem; min-height: 3.25rem; padding: 0 1.6rem; border: 1px solid var(--color-mar); border-radius: 999px; font-size: 0.98rem; font-weight: 600; letter-spacing: -0.005em; transition: background-color 300ms, color 300ms, border-color 300ms; }
+  .btn-mar { background: var(--color-mar); color: var(--color-sal); }
+  .btn-mar:hover { background: var(--color-mar-2); }
+  .btn-taronja { background: var(--color-sal); color: var(--color-mar); border-color: var(--color-sal); }
+  .btn-taronja:hover { background: transparent; color: var(--color-sal); }
+  .btn-line { background: transparent; }
+  .btn-line:hover { background: var(--color-mar); color: var(--color-sal); }
+  .fosc .btn-line { border-color: rgb(246 242 235 / 0.5); color: var(--color-sal); }
+  .fosc .btn-line:hover { background: var(--color-sal); color: var(--color-mar); }
+  .btn[disabled], .btn[aria-disabled="true"] { opacity: 0.4; pointer-events: none; }
+  .enllac { display: inline-flex; align-items: center; gap: 0.6rem; border-bottom: 1px solid currentColor; padding-bottom: 0.15rem; font-size: 0.98rem; font-weight: 600; transition: gap 300ms; }
+  .enllac:hover { gap: 1rem; }
+  .camp { display: block; width: 100%; min-height: 2.9rem; border: 0; border-bottom: 1px solid var(--color-linia); background: transparent; padding: 0.5rem 0; font: inherit; color: inherit; transition: border-color 300ms; }
+  .camp:focus { outline: none; border-bottom-color: var(--color-mar); }
+}
+
+/* Aparición: texto que sube y fotos que se descubren */
+.js [data-reveal] { opacity: 0; transform: translate3d(0, 16px, 0); transition: opacity 1100ms cubic-bezier(0.2, 0.7, 0.2, 1), transform 1100ms cubic-bezier(0.2, 0.7, 0.2, 1); transition-delay: calc(var(--i, 0) * 90ms); }
+.js [data-reveal].is-in { opacity: 1; transform: none; }
+.js [data-reveal="foto"] { opacity: 1; transform: none; clip-path: inset(100% 0 0 0); transition: clip-path 1400ms cubic-bezier(0.7, 0, 0.2, 1); transition-delay: calc(var(--i, 0) * 120ms); }
+.js [data-reveal="foto"].is-in { clip-path: inset(0 0 0 0); }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .js [data-reveal], .js [data-reveal="foto"] { opacity: 1; transform: none; clip-path: none; transition: none; }
+}

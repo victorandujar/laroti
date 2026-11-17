@@ -1,0 +1,25 @@
+---
+import emblema from '../assets/emblema.png';
+import { empresa } from '../data/empresa';
+import { isDemo } from '../lib/site';
+import { ui, type Lang } from '../i18n/ui';
+interface Props { lang?: Lang }
+const { lang = 'es' } = Astro.props;
+const tx = ui[lang].footer;
+---
+<footer class="fosc overflow-hidden bg-mar pb-20 text-sal lg:pb-0">
+  <div class="mx-auto max-w-[90rem] px-5 pt-16 sm:px-10">
+    <div class="flex flex-wrap items-end justify-between gap-8 border-b border-sal/15 pb-10">
+      <p class="flex items-center gap-4"><img src={emblema.src} width="44" height="44" alt="" class="size-11" loading="lazy" /><span class="titol text-[2.2rem] leading-none">Larotî</span></p>
+      <p class="label text-sal/55">{tx.desc}</p>
+    </div>
+    <div class="flex flex-wrap items-center justify-between gap-6 py-8 text-sm text-sal/55">
+      <p>{empresa.street}, {empresa.postalCode} {empresa.city}, {empresa.region}</p>
+      <ul class="flex flex-wrap gap-7">
+        {isDemo && <li><a href="/gestion" class="text-taronja hover:text-sal">{tx.panel}</a></li>}
+        <li><a href="/aviso-legal" class="hover:text-sal">{tx.avis}</a></li>
+        <li><a href="/privacidad" class="hover:text-sal">{tx.priv}</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
