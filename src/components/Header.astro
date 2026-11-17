@@ -4,7 +4,7 @@ import { ui, home, type Lang } from '../i18n/ui';
 interface Props { lang?: Lang; alternates?: Record<Lang, string>; panel?: boolean }
 const { lang = 'es', alternates = { es: '/', en: '/en' }, panel = false } = Astro.props;
 const tx = ui[lang];
-const izq = [['hoy', tx.nav.hoy], ['granos', tx.nav.granos], ['carta', tx.nav.productos]] as const;
+const izq = [['hoy', tx.nav.hoy], ['historia', tx.nav.historia], ['carta', tx.nav.productos]] as const;
 ---
 <header class="sticky top-0 z-40 border-b border-linia/80 bg-sal/92 backdrop-blur-md">
   <div class="mx-auto grid h-[4.75rem] max-w-[88rem] grid-cols-[1fr_auto_1fr] items-center gap-6 px-5 sm:px-10">
@@ -17,7 +17,7 @@ const izq = [['hoy', tx.nav.hoy], ['granos', tx.nav.granos], ['carta', tx.nav.pr
     )}
     <a href={home(lang)} class="flex items-center gap-3 justify-self-center">
       <img src={emblema.src} width="30" height="30" alt="" class="size-[1.9rem]" />
-      <span class="titol text-[1.85rem] leading-none tracking-[0.01em]"><span aria-hidden="true">Larot<span class="i-circ">ı</span></span><span class="sr-only">Larotî</span></span>
+      <span class="titol text-[1.85rem] leading-none tracking-[0.01em]">Larotî</span>
     </a>
     <div class="flex items-center justify-end gap-6">
       {panel ? <a href="/" class="btn btn-line min-h-10 px-5">Ver la web</a> : (

@@ -5,7 +5,7 @@ export const home = (lang: Lang) => (lang === 'en' ? '/en' : '/');
 const es = {
   meta: { title: 'Larotî · Micropanadería y obrador abierto en Campos, Mallorca', description: 'Pan fresco de masa madre y harina eco en Campos, Mallorca. Mira qué hay hoy en el mostrador y reserva tu pan para recogerlo. De martes a sábado, de 8 a 14 h.' },
   skip: 'Saltar al contenido', demo: 'Propuesta de diseño no oficial', demoBy: 'Preparada por Ammavaroo para',
-  nav: { hoy: 'Hoy', reserva: 'Reservar', granos: 'Granos antiguos', productos: 'La carta', contacto: 'Visítanos', principal: 'Principal', idioma: 'Idioma', btn: 'Reservar' },
+  nav: { hoy: 'Hoy', historia: 'Historia', reserva: 'Reservar', granos: 'Granos antiguos', productos: 'La carta', contacto: 'Visítanos', principal: 'Principal', idioma: 'Idioma', btn: 'Reservar' },
   hero: {
     eyebrow: 'Micropanadería · Obrador abierto',
     h1: 'Pan con <em>tiempo</em>, hecho en Campos.',
@@ -26,7 +26,7 @@ const es = {
   },
   reserva: {
     label: 'Reservas', h2: 'Te lo <em>guardamos</em>.',
-    text: 'Elige el día, añade lo que quieras y pásate a recogerlo de 8 a 14 h. Se paga en la tienda.',
+    text: 'Hacemos poco pan, a propósito. Resérvalo y te lo apartamos: elige el día, añade lo que quieras y recógelo de 8 a 14 h. Se paga en la tienda.',
     dia: '¿Qué día pasas?', que: '¿Qué te guardamos?', resumen: 'Tu reserva',
     vacio: 'Todavía no has añadido nada.', piezas: (n: number) => (n === 1 ? '1 pieza' : `${n} piezas`),
     nombre: 'Nombre', telefono: 'Teléfono', nota: 'Nota', opcional: '(opcional)',
@@ -42,10 +42,20 @@ const es = {
     finca: 'De la Finca Bellver Ric, en Manacor',
   },
   productos: { label: 'Del obrador', h2: 'La <em>carta</em>', sinGlutenCorto: 'Sin gluten', sub: 'Todo sale de nuestro obrador, con masa madre y harina eco.', sinGluten: 'naturalmente sin gluten', nota: 'Los productos «naturalmente sin gluten» se hacen en un obrador donde se trabaja con gluten: no son aptos para celíacos.', todo: 'Todo', ver: 'Ingredientes' },
+  historia: {
+    label: 'Nuestra historia', h2: 'De Dubái a la <em>calle Convent</em>.',
+    alt: 'Manos sosteniendo una hogaza de masa madre recién hecha',
+    firma: 'Juan y Ana. Una familia, un obrador y pan hecho con tiempo.',
+    anys: { Antes: 'Antes', Hoy: 'Hoy' },
+    mapaT: 'Su <em>Mallorca</em>', mapaD: 'Lo que entra y sale del obrador cabe en un trozo de isla.',
+    mapaAria: 'Mapa de Mallorca con Campos, Manacor, Palma y Es Trenc',
+  },
+  sello: 'Micropanadería · Campos · Mallorca · Desde 2022 · ',
+  mercado: 'Jueves y sábado, día de mercado: ven temprano',
   obrador: {
     label: 'El obrador', h2: 'Un obrador <em>abierto</em>, a la vista de todos.', alt1: 'Hogazas en la estantería de Larotî', alt2: 'Cruasán de Larotî',
-    p1: 'Tenemos un par de mesas para tomar un café mientras se forman los panes. Trabajamos con harinas ecológicas, masa madre y tiempo.',
-    p2: 'Además del pan encontrarás laminados, dulces, salados y una selección de productos de la isla.',
+    p1: 'Hay una mesa para tomar un café mientras se forman los panes, a la vista. Harinas ecológicas de Roca Fariners, granos antiguos de Manacor, masa madre y tiempo.',
+    p2: 'Además del pan hay laminados, dulces y salados, el chocolate Maüa de Palma y una pequeña despensa de la isla. Si vas a Es Trenc, pasa antes: el picnic, resuelto.',
     ceramica: 'Cerámica de Isabella Avalos', ceramicaT: 'Piezas únicas hechas a mano por una artesana de Campos, a la venta en la micropanadería. Isabella también da clases en su casa.',
     puntos: ['Harinas ecológicas', 'Masa madre', 'Granos de Mallorca', 'Empresa familiar'],
   },
@@ -63,7 +73,7 @@ type Textos = typeof es;
 const en: Textos = {
   meta: { title: 'Larotî · Micro-bakery and open workshop in Campos, Mallorca', description: 'Fresh sourdough bread made with organic flour in Campos, Mallorca. See what is on the counter today and reserve your loaf for pickup. Tuesday to Saturday, 8 am to 2 pm.' },
   skip: 'Skip to content', demo: 'Unofficial design proposal', demoBy: 'Prepared by Ammavaroo for',
-  nav: { hoy: 'Today', reserva: 'Reserve', granos: 'Ancient grains', productos: 'Menu', contacto: 'Visit us', principal: 'Main', idioma: 'Language', btn: 'Reserve' },
+  nav: { hoy: 'Today', historia: 'Our story', reserva: 'Reserve', granos: 'Ancient grains', productos: 'Menu', contacto: 'Visit us', principal: 'Main', idioma: 'Language', btn: 'Reserve' },
   hero: {
     eyebrow: 'Micro-bakery · Open workshop',
     h1: 'Bread made with <em>time</em>, in Campos.',
@@ -84,7 +94,7 @@ const en: Textos = {
   },
   reserva: {
     label: 'Reservations', h2: 'We will <em>keep it</em> for you.',
-    text: 'Pick a day, add what you would like and collect it between 8 am and 2 pm. You pay in the shop.',
+    text: 'We bake little, on purpose. Reserve and we will set it aside: pick a day, add what you would like and collect it between 8 am and 2 pm. You pay in the shop.',
     dia: 'Which day will you come?', que: 'What shall we keep for you?', resumen: 'Your reservation',
     vacio: 'Nothing added yet.', piezas: (n: number) => (n === 1 ? '1 item' : `${n} items`),
     nombre: 'Name', telefono: 'Phone', nota: 'Note', opcional: '(optional)',
@@ -100,10 +110,20 @@ const en: Textos = {
     finca: 'From Finca Bellver Ric, in Manacor',
   },
   productos: { label: 'From the workshop', h2: 'The <em>menu</em>', sinGlutenCorto: 'Gluten-free', sub: 'Everything comes from our workshop, with sourdough and organic flour.', sinGluten: 'naturally gluten-free', nota: '“Naturally gluten-free” products are made in a workshop that handles gluten: they are not suitable for coeliacs.', todo: 'All', ver: 'Ingredients' },
+  historia: {
+    label: 'Our story', h2: 'From Dubai to <em>Carrer Convent</em>.',
+    alt: 'Hands holding a freshly baked sourdough loaf',
+    firma: 'Juan and Ana. A family, a workshop and bread made with time.',
+    anys: { Antes: 'Before', Hoy: 'Today' },
+    mapaT: 'Their <em>Mallorca</em>', mapaD: 'Everything that comes in and out of the workshop fits in a corner of the island.',
+    mapaAria: 'Map of Mallorca with Campos, Manacor, Palma and Es Trenc',
+  },
+  sello: 'Micro-bakery · Campos · Mallorca · Since 2022 · ',
+  mercado: 'Thursday and Saturday are market days: come early',
   obrador: {
     label: 'The workshop', h2: 'An <em>open</em> workshop, in plain sight.', alt1: 'Loaves on the shelf at Larotî', alt2: 'Croissant from Larotî',
-    p1: 'We have a couple of tables for a coffee while the loaves are shaped. We work with organic flours, sourdough and time.',
-    p2: 'Besides bread you will find pastries, sweet and savoury bakes and a selection of products from the island.',
+    p1: 'There is a table for a coffee while the loaves are shaped, in plain sight. Organic flours from Roca Fariners, ancient grains from Manacor, sourdough and time.',
+    p2: 'Besides bread there are pastries, sweet and savoury bakes, Maüa chocolate from Palma and a small pantry from the island. Heading to Es Trenc? Stop by first: picnic sorted.',
     ceramica: 'Ceramics by Isabella Avalos', ceramicaT: 'One-of-a-kind pieces handmade by an artisan from Campos, for sale at the micro-bakery. Isabella also gives classes at her home.',
     puntos: ['Organic flours', 'Sourdough', 'Mallorcan grains', 'Family business'],
   },

@@ -15,7 +15,7 @@ const preview = Object.fromEntries(await Promise.all(productos.map(async (p) => 
   <div class="mx-auto max-w-[80rem] px-5 py-28 sm:px-10 sm:py-36">
     <div class="mx-auto max-w-2xl text-center">
       <p class="label text-taronja-2" data-reveal>{tx.label}</p>
-      <h2 id="carta-t" class="titol mt-6 text-[clamp(2.8rem,6vw,5.4rem)] font-light" data-reveal style="--i:1" set:html={tx.h2} />
+      <h2 id="carta-t" class="titol mt-6 text-[clamp(2.8rem,6vw,5.4rem)]" data-reveal style="--i:1" set:html={tx.h2} />
       <p class="mx-auto mt-7 max-w-md text-gris" data-reveal style="--i:2">{tx.sub}</p>
     </div>
     <div class="mt-20 grid gap-x-24 gap-y-20 md:grid-cols-2">
