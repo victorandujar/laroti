@@ -12,10 +12,10 @@ const tx = ui[lang].footer;
     <img src={emblema.src} width="56" height="56" alt="" class="mx-auto size-14" loading="lazy" />
     <p class="titol mt-6 text-[clamp(3.4rem,8vw,6.5rem)] font-light leading-none">Larot<span class="i-circ">ı</span></p>
     <p class="cursiva mt-4 text-[1.3rem] text-sal/70">{tx.desc}</p>
-    <div class="mt-16 flex flex-wrap items-center justify-between gap-6 border-t border-sal/15 py-8 text-[0.85rem] text-sal/55">
+    <div class="mt-16 flex flex-wrap items-center justify-between gap-6 border-t border-sal/15 py-8 text-[0.85rem] text-sal/70">
       <p>{empresa.street}, {empresa.postalCode} {empresa.city}, {empresa.region}</p>
       <ul class="flex flex-wrap gap-7">
-        {isDemo && <li><a href="/gestion" class="text-taronja hover:text-sal">{tx.panel}</a></li>}
+        {isDemo && <li><a href="/gestion" class="text-[#e0a46a] hover:text-sal">{tx.panel}</a></li>}
         <li><a href="/aviso-legal" class="hover:text-sal">{tx.avis}</a></li>
         <li><a href="/privacidad" class="hover:text-sal">{tx.priv}</a></li>
       </ul>
